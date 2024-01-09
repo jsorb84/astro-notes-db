@@ -3,3 +3,4 @@
 
 export const SITE_TITLE = "Urban Blog";
 export const SITE_DESCRIPTION = "Welcome to my website!";
+export const SITE_PATH = "/astro-notes-db";
