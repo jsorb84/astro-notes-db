@@ -1,0 +1,25 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import 'github-markdown-css/github-markdown-dark.css'
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+        <slot name="header" />
+	</head>
+	<body class="markdown-body">
+		<Header title={SITE_TITLE} />
+		<main>
+			<slot />
+		</main>
+	</body>
+    <footer>
+        <Footer />
+        <slot name="footer" />
+    </footer>
+</html>

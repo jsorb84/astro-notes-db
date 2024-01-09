@@ -1,0 +1,10 @@
+---
+import {getCollection, type CollectionEntry} from 'astro:content'
+import PostsDisplay from '../../components/PostsDisplay.astro'
+import Main from '../../layouts/Main.astro'
+const coll: CollectionEntry<'docs'>[] = (await getCollection<'docs'>('docs')) as CollectionEntry<'docs'>[]
+---
+
+<Main>
+    <PostsDisplay posts={coll} />
+</Main>

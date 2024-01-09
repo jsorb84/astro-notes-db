@@ -1,0 +1,26 @@
+---
+import type { CollectionEntry } from 'astro:content'
+
+interface Props<T extends 'docs'> {
+    post: CollectionEntry<T>
+}
+let {post} = Astro.props
+---
+<article 
+style={`background-image: url(${post.data.coverImage}); background-size: cover; background-position: center; opacity: 0.8;`}
+class="">
+    <h2 class=" text-gray-900">{post.data.title}</h2>
+    <p>{post.data.description ?? 'No Post Description'}</p>
+    <div>
+        <a href={`/${post.collection}/${post.slug}`}>Read Post</a>
+    </div>
+</article>
+
+<style lang="postcss">
+    article {
+        @apply text-black border rounded-xl p-4 min-w-full border-black;
+    }
+    a {
+        @apply border rounded-xl p-2 border-black;
+    }
+</style>

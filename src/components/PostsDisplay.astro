@@ -1,0 +1,18 @@
+---
+import type { CollectionEntry, CollectionKey } from 'astro:content'
+import Post from './Post.astro'
+interface Props {
+	posts: CollectionEntry<CollectionKey>[]
+}
+const {posts} = Astro.props
+---
+
+<div class="grid grid-flow-col gap-6">
+	{
+		posts.map(p => {
+			return (
+				<Post post={p} />
+			)
+		})
+	}
+</div>

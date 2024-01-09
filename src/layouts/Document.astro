@@ -1,0 +1,84 @@
+---
+import 'github-markdown-css/github-markdown-dark.css'
+
+import type { CollectionEntry } from 'astro:content';
+
+type Props = {doc: CollectionEntry<'docs'>};
+
+const { doc } : Props = Astro.props;
+---
+
+			<article>
+				<div class="hero-image">
+					{doc.data.coverImage && <img width={510} height={510} src={doc.data.coverImage} alt="" />}
+				</div>
+				<div class="prose">
+					<div class="title">
+						<!-- <div class="date">
+							<FormattedDate date={pubDate} />
+							{
+								updatedDate && (
+									<div class="last-updated-on">
+										Last updated on <FormattedDate date={updatedDate} />
+									</div>
+								)
+							}
+						</div> -->
+						<h1>{doc.data.title}</h1>
+						
+					</div>
+					<slot />
+				</div>
+			</article>
+
+	
+            <style>
+                main {
+                    width: calc(100% - 1em);
+                    max-width: 100%;
+                    color: rgb(var(--white));
+                    margin: 0;
+                }
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                h6 {
+                    margin: 0 0 0.5rem 0;
+                    color: rgb(var(--white));
+                    line-height: 1.2;
+                }
+                .hero-image {
+                    width: 100%;
+                }
+                .hero-image img {
+                    display: block;
+                    margin: 0 auto;
+                    border-radius: 12px;
+                    box-shadow: var(--box-shadow);
+                }
+                .prose {
+                    width: 720px;
+                    max-width: calc(100% - 2em);
+                    margin: auto;
+                    padding: 1em;
+                    color: rgb(var(--white));
+                }
+                .title {
+                    margin-bottom: 1em;
+                    padding: 1em 0;
+                    text-align: center;
+                    line-height: 1;
+                }
+                .title h1 {
+                    margin: 0 0 0.5em 0;
+                }
+                .date {
+                    margin-bottom: 0.5em;
+                    color: rgb(var(--white));
+                }
+                .last-updated-on {
+                    font-style: italic;
+                }
+            </style>
