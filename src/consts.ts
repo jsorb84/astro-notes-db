@@ -32,8 +32,8 @@ export const makeLinkString = (path: string) => {
 };
 export const SITE_TITLE = "Urban Archives";
 export const SITE_DESCRIPTION = "Welcome to my website!";
-export const SITE_PATH: string = "astro-notes-db";
-//export const SITE_PATH: string = "";
+//export const SITE_PATH: string = "astro-notes-db";
+export const SITE_PATH: string = "";
 export const HEADER_ITEMS: HeaderItem[] = [
 	{ title: "Home", url: "/" },
 	{ title: "Docs", url: "/docs" },

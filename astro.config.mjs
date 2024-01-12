@@ -7,6 +7,6 @@ import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://jsorb84.github.io/astro-notes-db/",
+	site: "https://archive.officialurban.xyz",
 	integrations: [mdx(), sitemap(), svelte(), tailwind()],
 });
