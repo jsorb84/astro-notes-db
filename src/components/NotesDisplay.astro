@@ -1,0 +1,20 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import Post from './Post.astro'
+interface Props {
+	notes: CollectionEntry<'notes'>[]
+}
+const {notes} = Astro.props
+---
+
+<div class="grid grid-cols-5 gap-8 place-content-center">
+	
+	{
+		notes.map((p) => (
+				<div class="w-[250px]">
+					<Post post={p} />
+				</div>
+			))
+	}
+	
+</div>

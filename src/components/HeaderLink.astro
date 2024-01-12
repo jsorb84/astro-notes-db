@@ -2,23 +2,16 @@
 import type { HTMLAttributes } from 'astro/types';
 
 type Props = HTMLAttributes<'a'>;
-import { SITE_PATH } from '../consts';
+import { makeLink } from '../consts';
 const { href, class: className, ...props } = Astro.props;
 
 const { pathname } = Astro.url;
 const isActive = href === pathname || href === pathname.replace(/\/$/, '');
-const makeLink = (path: string | URL | null | undefined) => {
-	// Input something like /docs needs to add path to /path/docs
-	if(path === undefined || path === null) return;
-	if(typeof path === 'object') return path
-	if(path.startsWith('/') && typeof path =='string') {
-		return `${SITE_PATH}${href}`;
-	}
-	return path;
-};
+
 ---
 
 <a href={makeLink(href)} class="text-white" class:list={[className, { active: isActive }]} {...props}>
+	
 	<slot />
 </a>
 <style>

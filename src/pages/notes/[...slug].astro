@@ -6,7 +6,7 @@ import Main from "../../layouts/Main.astro";
 import type { PageSEO } from "../../consts";
 const {doc} = Astro.props
 export const getStaticPaths = (async () => {
-    const docs = await getCollection('docs');
+    const docs = await getCollection('notes');
     return docs.map(d => ({
         params: {
             slug: d.slug

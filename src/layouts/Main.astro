@@ -3,20 +3,25 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import 'github-markdown-css/github-markdown-dark.css'
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { SITE_TITLE, type PageSEO } from '../consts';
+
+interface Props {
+	page?: PageSEO
+}
+const {page} = Astro.props
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead page={page} />
         <slot name="header" />
 	</head>
-	<body class="markdown-body">
+	<body class="markdown-body"> 
 		<Header title={SITE_TITLE} />
-		<main>
+		<div class="p-10">
 			<slot />
-		</main>
+		</div>
 	</body>
     <footer>
         <Footer />

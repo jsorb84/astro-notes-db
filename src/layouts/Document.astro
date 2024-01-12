@@ -2,43 +2,51 @@
 import 'github-markdown-css/github-markdown-dark.css'
 
 import type { CollectionEntry } from 'astro:content';
+import FormattedDate from '../components/FormattedDate.astro';
+import type { CollectionKey } from 'astro:content';
 
-type Props = {doc: CollectionEntry<'docs'>};
+type Props = {doc: CollectionEntry<CollectionKey>};
 
 const { doc } : Props = Astro.props;
+const postDate = doc.data.pubDate
 ---
 
-			<article>
+			<main class="">
 				<div class="hero-image">
-					{doc.data.coverImage && <img width={510} height={510} src={doc.data.coverImage} alt="" />}
+					<img width={510} height={510} src={doc.data.coverImage ?? 'https://www.digitalocean.com/_next/static/media/intro-to-cloud.d49bc5f7.jpeg'} alt="" />
 				</div>
 				<div class="prose">
 					<div class="title">
-						<!-- <div class="date">
-							<FormattedDate date={pubDate} />
+						<div class="date">
+                            
 							{
-								updatedDate && (
+								postDate && (
 									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
+										Posted On <FormattedDate date={postDate} /><br />
+                                        
 									</div>
 								)
 							}
-						</div> -->
+						</div>
 						<h1>{doc.data.title}</h1>
-						
+						<div class="grid grid-flow-col grid-cols-3">
+                            <sub>Written & Compiled By {doc.data.author}</sub>
+                            <sub><b>Keywords:</b> {doc.data.keywords ?? ''}</sub>
+                            <sub><b>Description:</b> {doc.data.description ?? ''}</sub>
+                        </div>
 					</div>
 					<slot />
 				</div>
-			</article>
+			</main>
 
 	
             <style>
-                main {
+                /* main {
                     width: calc(100% - 1em);
                     max-width: 100%;
                     color: rgb(var(--white));
                     margin: 0;
-                }
+                } */
                 h1,
                 h2,
                 h3,
@@ -58,13 +66,13 @@ const { doc } : Props = Astro.props;
                     border-radius: 12px;
                     box-shadow: var(--box-shadow);
                 }
-                .prose {
+                /* .prose {
                     width: 720px;
                     max-width: calc(100% - 2em);
                     margin: auto;
                     padding: 1em;
                     color: rgb(var(--white));
-                }
+                } */
                 .title {
                     margin-bottom: 1em;
                     padding: 1em 0;

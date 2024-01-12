@@ -1,0 +1,10 @@
+---
+import {getCollection, type CollectionEntry} from 'astro:content'
+import NotesDisplay from '../../components/NotesDisplay.astro'
+import Main from '../../layouts/Main.astro'
+const notes: CollectionEntry<'notes'>[] = (await getCollection<'notes'>('notes')) as CollectionEntry<'notes'>[]
+---
+
+<Main>
+    <NotesDisplay notes={notes} />
+</Main>

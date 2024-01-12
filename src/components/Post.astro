@@ -1,26 +1,30 @@
 ---
-import type { CollectionEntry } from 'astro:content'
+import type { CollectionEntry, CollectionKey } from 'astro:content'
+import { makeLinkString } from '../consts'
 
-interface Props<T extends 'docs'> {
+interface Props<T extends CollectionKey> {
     post: CollectionEntry<T>
 }
 let {post} = Astro.props
+//style={`background-image: url(${post.data.coverImage ?? 'https://www.digitalocean.com/_next/static/media/intro-to-cloud.d49bc5f7.jpeg'}); background-size: cover; background-position: center; opacity: 0.8;`}
 ---
+<a href={makeLinkString(`${post.collection}/${post.slug}`)}>
 <article 
-style={`background-image: url(${post.data.coverImage}); background-size: cover; background-position: center; opacity: 0.8;`}
-class="">
-    <h2 class=" text-gray-900">{post.data.title}</h2>
-    <p>{post.data.description ?? 'No Post Description'}</p>
-    <div>
-        <a href={`/${post.collection}/${post.slug}`}>Read Post</a>
-    </div>
-</article>
+
+class="max-w-[350px] max-h-[250px] min-w-full min-h-full bg-discord-800 ">
+        <h3 class=" ">{post.data.title}</h3>
+        <p class="text-white">{post.data.description ?? 'No Post Description'}</p>
+       
+    </article>
+</a>
 
 <style lang="postcss">
     article {
-        @apply text-black border rounded-xl p-4 min-w-full border-black;
+        @apply text-black border rounded-xl p-4 border-black;
+        
     }
-    a {
-        @apply border rounded-xl p-2 border-black;
+    :root::-webkit-scrollbar {
+        display: none;
     }
+    
 </style>
