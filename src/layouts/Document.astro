@@ -29,10 +29,10 @@ const postDate = doc.data.pubDate
 							}
 						</div>
 						<h1>{doc.data.title}</h1>
-						<div class="grid grid-flow-col grid-cols-3">
+						<div class="grid grid-flow-row">
                             <sub>Written & Compiled By {doc.data.author}</sub>
-                            <sub><b>Keywords:</b> {doc.data.keywords ?? ''}</sub>
-                            <sub><b>Description:</b> {doc.data.description ?? ''}</sub>
+                            
+                           
                         </div>
 					</div>
 					<slot />

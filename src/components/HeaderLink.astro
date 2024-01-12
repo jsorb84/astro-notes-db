@@ -2,7 +2,6 @@
 import type { HTMLAttributes } from 'astro/types';
 
 type Props = HTMLAttributes<'a'>;
-import { makeLink } from '../consts';
 const { href, class: className, ...props } = Astro.props;
 
 const { pathname } = Astro.url;
@@ -10,7 +9,7 @@ const isActive = href === pathname || href === pathname.replace(/\/$/, '');
 
 ---
 
-<a href={makeLink(href)} class="text-white" class:list={[className, { active: isActive }]} {...props}>
+<a href={href} class="text-white" class:list={[className, { active: isActive }]} {...props}>
 	
 	<slot />
 </a>
