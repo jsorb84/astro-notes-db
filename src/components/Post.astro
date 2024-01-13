@@ -8,7 +8,7 @@ interface Props<T extends CollectionKey> {
 let {post} = Astro.props
 //style={`background-image: url(${post.data.coverImage ?? 'https://www.digitalocean.com/_next/static/media/intro-to-cloud.d49bc5f7.jpeg'}); background-size: cover; background-position: center; opacity: 0.8;`}
 ---
-<a href={`${post.collection}/${post.slug}`}>
+<a href={`/${post.collection}/${post.slug}`}>
 <article 
 
 class="max-w-[350px] max-h-[250px] min-w-full min-h-full bg-discord-800 ">
