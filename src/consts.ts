@@ -14,6 +14,14 @@ export interface PageSEO {
 	author: string;
 	pubDate?: Date;
 }
+export interface NPMPackage {
+	name: string;
+	description: string;
+	version: string;
+	npmurl: string;
+	docsurl: string;
+}
+
 export const makeLink = (path: string | URL | null | undefined) => {
 	// Input something like /docs needs to add path to /path/docs
 	if (path === undefined || path === null) return;
@@ -38,4 +46,28 @@ export const HEADER_ITEMS: HeaderItem[] = [
 	{ title: "Home", url: "/" },
 	{ title: "Docs", url: "/docs" },
 	{ title: "Notes", url: "/notes" },
+	{ title: "My Packages", url: "/packages" },
+];
+export const NPM_PACKAGES: NPMPackage[] = [
+	{
+		name: "@theofficialurban/svelte-utils",
+		description: "A collection of my personal Svelte Utilities",
+		version: "v1.3.2",
+		npmurl: "https://www.npmjs.com/package/@theofficialurban/svelte-utils",
+		docsurl: "https://archive.officialurban.xyz/docs/svelte-utilities",
+	},
+	{
+		name: "@theofficialurban/svelte-gradience",
+		description: "A Svelte Component for a gradient background",
+		version: "v1.0.5",
+		npmurl: "https://www.npmjs.com/package/@theofficialurban/svelte-gradience",
+		docsurl: "https://archive.officialurban.xyz/docs/svelte-gradience",
+	},
+	{
+		name: "@theofficialurban/sveltewrite",
+		description: "A set of Svelte Components for Appwrite & Reactivity",
+		version: "v1.5.1",
+		npmurl: "https://www.npmjs.com/package/@theofficialurban/sveltewrite",
+		docsurl: "https://archive.officialurban.xyz/docs/sveltewrite",
+	},
 ];

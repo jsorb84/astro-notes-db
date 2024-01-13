@@ -1,0 +1,35 @@
+---
+import Main from "../layouts/Main.astro";
+import {NPM_PACKAGES, type PageSEO} from '../consts'
+import NPMPackage from '../components/NPMPackage.svelte'
+
+const SEO: PageSEO = {
+    title: "My NPM Packages",
+    description: "A complete listing of my personal NPM packages that I've authored or contributed to.",
+    url: "https://archive.officialurban.xyz/packages",
+    image: "https://kinsta.com/wp-content/uploads/2022/06/what-is-npm.png",
+    keywords: "npm, packages, node, nodejs, javascript, typescript, react, svelte, vue, angular, frontend, backend, fullstack, developer, engineer, software, web, app, application, website, site, portfolio, blog, officialurban, urban, official, archive, archive.officialurban.xyz, officialurban.xyz, officialurban archive, officialurban archive.officialurban.xyz, officialurban.xyz archive, officialurban.xyz archive.officialurban.xyz, officialurban archive.officialurban.xyz archive, officialurban.xyz archive.officialurban.xyz archive, officialurban archive.officialurban.xyz archive.officialurban.xyz, officialurban.xyz archive.officialurban.xyz archive.officialurban.xyz, officialurban archive.officialurban.xyz archive.officialurban.xyz archive, officialurban.xyz archive.officialurban.xyz archive.officialurban.xyz archive, officialurban archive.officialurban.xyz archive.officialurban.xyz archive.officialurban.xyz",
+    author: "Urban"
+}
+
+---
+
+<Main page={SEO}>
+    <h1 class="">
+        My NPM Packages
+        
+    </h1>
+    <h3>
+        <span class="py-2">Total Package Downloads</span>
+        <img src="https://img.shields.io/npm-stat/dw/urban841999?style=for-the-badge&logo=npm&color=blue&link=https%3A%2F%2Farchive.officialurban.xyz%2Fpackages" />
+    </h3>
+    <p>
+        A complete listing of my personal NPM packages that I've authored or contributed to.
+        <div class="grid grid-flow-col grid-cols-4">
+            {
+                NPM_PACKAGES.map(p => (<NPMPackage pack={p} />))
+            }
+        </div>
+    </p>
+    
+</Main>
