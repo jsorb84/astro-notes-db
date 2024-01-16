@@ -1,0 +1,19 @@
+---
+import type {LinkBlock} from '../consts'
+interface Props {
+    links: LinkBlock
+}
+const {links} = Astro.props
+---
+<div class="px-10">
+    <h2>{links.title}</h2>
+    {links.description && <sub>{links.description}</sub>}
+    <p>
+        <ul>
+            {links.items.map(i => (<li>
+                <a href={i.url} target="_blank" class="text-2xl">{i.title}</a>
+                {i.description && <small class="px-2"><b>Description:</b> {i.description ?? 'No Description'}</small>}
+            </li>))}
+        </ul>
+    </p>
+</div>

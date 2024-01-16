@@ -1,0 +1,20 @@
+---
+import Main from "../layouts/Main.astro";
+import LinkBlock from "../components/LinkBlock.astro";
+import { LinkBlocks } from "../consts";
+---
+
+<Main>
+    <h3>Link Registry</h3>
+    <p>
+        {
+            LinkBlocks.map(b => (<LinkBlock links={b} />))
+        }
+    </p>
+</Main>
+
+<style>
+    h1 {
+        font-family: 'Montserrat', sans-serif;
+    }
+</style>

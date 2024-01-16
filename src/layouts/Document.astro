@@ -3,9 +3,9 @@ import 'github-markdown-css/github-markdown-dark.css'
 
 import type { CollectionEntry } from 'astro:content';
 import FormattedDate from '../components/FormattedDate.astro';
-import type { CollectionKey } from 'astro:content';
 
-type Props = {doc: CollectionEntry<CollectionKey>};
+
+type Props = {doc: CollectionEntry<'docs' | 'notes'>};
 
 const { doc } : Props = Astro.props;
 const postDate = doc.data.pubDate

@@ -1,0 +1,27 @@
+---
+import type { CollectionEntry, CollectionKey } from 'astro:content'
+import Post from './Post.astro';
+
+interface Props {
+    category: CollectionEntry<'category'>;
+    posts: CollectionEntry<CollectionKey>[]
+}
+const {category, posts} = Astro.props
+const postsInCat = posts.map(p => {
+    if(p.collection !== 'category' && p.data.category?.id == category.id) return p
+    return null
+})
+---
+
+<h2>{category.data.name}</h2>
+<div class="grid grid-cols-5 gap-8 place-content-center">
+	{postsInCat && postsInCat.map(p => {
+        if(p) {
+            
+            <Post post={p} />
+        }
+    })}
+	
+</div>
+
+

@@ -11,6 +11,52 @@ keywords: python, typing, programming, notes
 
 ### [Static Typing /w Python](https://typing.readthedocs.io/en/latest/)
 
+### [Param Spec Documentation](https://docs.python.org/3/library/typing.html#typing.ParamSpec)
+
+# Important Types Quick Reference
+
+- `typing.ClassVar`
+  Used to mark a variable within a class as existing on the class itself vs instance (static variables sort-of)
+- `typing.Optional`
+  The same as `Union[X | None]`
+- `typing.Concatenate`
+  See [Concatenate / ParamSpec](https://docs.python.org/3/library/typing.html#typing.ParamSpec)
+- `typing.Literal`
+  Used to specify a literal type `Literal['W']` means the static letter `W`
+- `typing.Required` & `typing.NotRequired`
+  Used for `TypedDict` to specify required and non-required keys
+- `typing.Unpack`
+  Used to unpack for `**kwargs` so instead of saying `**kwargs: X` which means that each item inside `**kwargs` is type `X` we use `Unpack[X]` to unpack the typed dict allowing it to be used for `**kwargs`
+- `typing.TypeVar` [¶](https://docs.python.org/3/library/typing.html#typing.TypeVar "Permalink to this definition")
+  Base class for type variables / generics with a few special options
+  - See also [`typing.TypeVarTuple`](https://docs.python.org/3/library/typing.html#typing.TypeVarTuple "Permalink to this definition") and [`typing.ParamSpec`](https://docs.python.org/3/library/typing.html#typing.ParamSpec)
+
+### [Protocols](https://docs.python.org/3/library/typing.html#protocols "Permalink to this headline")
+
+The following protocols are provided by the typing module. All are decorated with [`@runtime_checkable`](https://docs.python.org/3/library/typing.html#typing.runtime_checkable "typing.runtime_checkable").
+
+*class* typing.SupportsAbs [¶](https://docs.python.org/3/library/typing.html#typing.SupportsAbs "Permalink to this definition")
+
+An ABC with one abstract method `__abs__` that is covariant in its return type.
+
+- *class* `typing.SupportsBytes` [¶](https://docs.python.org/3/library/typing.html#typing.SupportsBytes "Permalink to this definition")
+  An ABC with one abstract method `__bytes__`.
+
+- *class* `typing.SupportsComplex` [¶](https://docs.python.org/3/library/typing.html#typing.SupportsComplex "Permalink to this definition")
+  An ABC with one abstract method `__complex__`.
+
+- *class* `typing.SupportsFloat` [¶](https://docs.python.org/3/library/typing.html#typing.SupportsFloat "Permalink to this definition")
+  An ABC with one abstract method `__float__`.
+
+- *class* `typing.SupportsIndex` [¶](https://docs.python.org/3/library/typing.html#typing.SupportsIndex "Permalink to this definition")
+  An ABC with one abstract method `__index__`.
+
+- *class* `typing.SupportsInt` [¶](https://docs.python.org/3/library/typing.html#typing.SupportsInt "Permalink to this definition")
+  An ABC with one abstract method `__int__`.
+
+- *class* `typing.SupportsRound` [¶](https://docs.python.org/3/library/typing.html#typing.SupportsRound "Permalink to this definition")
+  An ABC with one abstract method `__round__` that is covariant in its return type.
+
 ## Type Aliases
 
 ```python
@@ -136,3 +182,29 @@ Point(1.1, 2.2)
 > Changed in version 3.11: If a field name is already included in the `__slots__` of a base class, it will not be included in the generated `__slots__` to prevent [overriding them](https://docs.python.org/3/reference/datamodel.html#datamodel-note-slots). Therefore, do not use `__slots__` to retrieve the field names of a dataclass. Use [`fields()`](https://docs.python.org/3/library/dataclasses.html#dataclasses.fields "dataclasses.fields") instead. To be able to determine inherited slots, base class `__slots__` may be any iterable, but *not* an iterator.
 >
 > - `weakref_slot`: If true (the default is `False`), add a slot named “**weakref**”, which is required to make an instance weakref-able. It is an error to specify `weakref_slot=True` without also specifying `slots=True`.
+
+## Class Typing
+
+To use a **class** as a type (a class that isn't instantiated, the class as a whole):
+
+```python
+class User: ...
+
+def makeUser(user_class: type[User]) -> User:
+	...
+	return
+```
+
+### `TypedDict`
+
+Typing a dictionary, this is essentially the same as a JavaScript Interface
+
+```python
+from typing import TypedDict, NotRequired, Required
+class Point(TypedDict):
+	x: NotRequired[float]
+	y: Required[float]
+	pass
+
+myDict: Point = {"x": 1.2, "y": 2.2}
+```

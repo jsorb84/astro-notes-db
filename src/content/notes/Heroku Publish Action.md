@@ -3,6 +3,7 @@ title: Publish to Heroku Action
 description: A Github action allowing you to automatically publish your site to Heroku. Used here on this site.
 keywords: github, actions, heroku, automation, git, notes, personal notes
 author: theofficialurban (Josh)
+category: docs
 ---
 
 ## Heroku Publish Action
@@ -10,7 +11,7 @@ author: theofficialurban (Josh)
 ### Github Action
 
 ```yaml
-name: 'Publish to Heroku' #set whatevername you want to your github job
+name: "Publish to Heroku" #set whatevername you want to your github job
 on:
   push:
     branches: [main, master]
@@ -65,7 +66,7 @@ CMD ["node", "build/index.js"]
 ### `compose.yaml`
 
 ```yaml
-version: '3'
+version: "3"
 
 services:
   app-node:
@@ -75,7 +76,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    user: 'node'
+    user: "node"
     ports:
       - 3000:3000
 ```

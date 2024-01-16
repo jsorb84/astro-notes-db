@@ -3,7 +3,7 @@
   https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
-
+@import url("https://fonts.googleapis.com/css2?family=Abel&family=Arimo&family=Bitter:wght@100;400&family=Courgette&family=Dosis&family=Manrope:wght@300;400&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mulish&family=Oswald:wght@400;700&family=Raleway&family=Ubuntu&family=Work+Sans:wght@100;400&display=swap");
 :root {
 	--accent: #2337ff;
 	--accent-dark: #000d8a;

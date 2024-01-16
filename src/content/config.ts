@@ -1,4 +1,4 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection, reference, z } from "astro:content";
 
 const docs = defineCollection({
 	type: "content",
@@ -10,6 +10,14 @@ const docs = defineCollection({
 		pubDate: z.date().optional(),
 		keywords: z.string().optional(),
 		author: z.string().optional(),
+		category: reference("category").optional(),
+	}),
+});
+const category = defineCollection({
+	type: "data",
+	schema: z.object({
+		name: z.string(),
+		keywords: z.string().optional(),
 	}),
 });
 const notes = defineCollection({
@@ -21,6 +29,7 @@ const notes = defineCollection({
 		pubDate: z.date().optional(),
 		keywords: z.string().optional(),
 		author: z.string().optional(),
+		category: reference("category").optional(),
 	}),
 });
-export const collections = { docs, notes };
+export const collections = { docs, notes, category };

@@ -3,7 +3,7 @@
 	export let pack: NPMPackage;
 </script>
 
-<div class="border w-[350px] h-[150px] p-3 rounded">
+<div class="border w-[350px] h-[185px] p-3 rounded container">
 	<span class="text-lg font-bold">{pack.name}</span>
 	<div class="py-5">
 		<a

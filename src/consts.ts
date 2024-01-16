@@ -21,6 +21,70 @@ export interface NPMPackage {
 	npmurl: string;
 	docsurl: string;
 }
+export interface LinkItem {
+	title: string;
+	url: string;
+	description?: string;
+}
+export interface LinkBlock {
+	title: string;
+	description?: string;
+	items: LinkItem[];
+}
+export const LinkBlocks: LinkBlock[] = [
+	{
+		title: "⏯️ Must See Videos",
+		description:
+			"These are videos that are highly recommended, and are a must watch. Some videos may be hard to find or may also be controversial.",
+		items: [
+			{
+				title: "📙 Logos XXI",
+				url: "https://www.youtube.com/playlist?list=PLRIiWpHT58JLYrgHMzHd87j03qHqspDz3",
+				description: "German Plato's Lectures on the 21st Century",
+			},
+			{
+				title: "🤖 Narrative AI - DARPA Bots",
+				url: "https://www.youtube.com/watch?v=PeZf-E_1tz0",
+				description:
+					"A video about the future of AI and how it is controlling the world via DARPA Bots",
+			},
+		],
+	},
+
+	{
+		title: "⚙️ Important Documentation",
+		description:
+			"Documentation links for important packages that I may be using currently.",
+		items: [
+			{
+				title: "📈 Pandas (Python) Documentation",
+				url: "https://pandas.pydata.org/docs/index.html",
+				description: "Documentation for Pandas, a Python Data Analysis Library",
+			},
+			{
+				title: "📊 Matplotlib (Python) Documentation",
+				url: "https://matplotlib.org/stable/contents.html",
+				description:
+					"Documentation for Matplotlib, a Python Data Visualization Library",
+			},
+			{
+				title: "📚 SvelteKit Documentation",
+				url: "https://kit.svelte.dev/docs",
+				description: "Documentation for SvelteKit, a Svelte Framework",
+			},
+			{
+				title: "💹 Alpha Vantage Documentation",
+				url: "https://www.alphavantage.co/documentation/",
+				description: "Documentation for Alpha Vantage, a Stock API",
+			},
+			{
+				title: "📈 Mplfinance Documentation",
+				url: "https://github.com/matplotlib/mplfinance",
+				description: "Documentation for Mplfinance",
+			},
+		],
+	},
+];
 
 export const makeLink = (path: string | URL | null | undefined) => {
 	// Input something like /docs needs to add path to /path/docs
@@ -38,16 +102,18 @@ export const makeLinkString = (path: string) => {
 	const rep = str.includes("//") ? str.replaceAll("//", "/") : str;
 	return rep;
 };
-export const SITE_TITLE = "Urban Archives";
+export const SITE_TITLE = "📖 Urban Archives";
 export const SITE_DESCRIPTION = "Welcome to my website!";
 //export const SITE_PATH: string = "astro-notes-db";
 export const SITE_PATH: string = "";
 export const HEADER_ITEMS: HeaderItem[] = [
 	{ title: "Home", url: "/" },
+	{ title: "Links", url: "/links" },
 	{ title: "Docs", url: "/docs" },
 	{ title: "Notes", url: "/notes" },
 	{ title: "My Packages", url: "/packages" },
 ];
+
 export const NPM_PACKAGES: NPMPackage[] = [
 	{
 		name: "@theofficialurban/svelte-utils",
