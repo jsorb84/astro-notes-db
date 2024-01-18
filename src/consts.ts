@@ -82,6 +82,12 @@ export const LinkBlocks: LinkBlock[] = [
 				url: "https://github.com/matplotlib/mplfinance",
 				description: "Documentation for Mplfinance",
 			},
+			{
+				title: "🐍 Python Module Index",
+				url: "https://docs.python.org/3/py-modindex.html",
+				description:
+					"Python Module Index - A list of all Standard Python Modules",
+			},
 		],
 	},
 ];
