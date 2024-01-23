@@ -4,6 +4,8 @@ description: Learn how to dockerize a SvelteKit App
 author: Urban
 coverImage: https://community-cdn-digitalocean-com.global.ssl.fastly.net/YMiWVwf44KxC6EmLNooKyr5w
 category: notes
+tags: ["Guides", "SvelteKit / Svelte", "Docker"]
+keywords: guide, docker, svelte, sveltekit, js
 ---
 
 ## Building the Dockerfile

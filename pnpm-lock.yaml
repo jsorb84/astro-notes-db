@@ -26,6 +26,9 @@ dependencies:
   astro:
     specifier: ^4.1.1
     version: 4.1.1(typescript@5.3.3)
+  astro-analytics:
+    specifier: ^2.7.0
+    version: 2.7.0
   github-markdown-css:
     specifier: ^5.5.0
     version: 5.5.0
@@ -1371,6 +1374,10 @@ packages:
   /astring@1.8.6:
     resolution: {integrity: sha512-ISvCdHdlTDlH5IpxQJIex7BWBywFWgjJSVdwst+/iQCoEYnyOaQ95+X1JGshuBjGp6nxKUy1jMgE3zPqN7fQdg==}
     hasBin: true
+    dev: false
+
+  /astro-analytics@2.7.0:
+    resolution: {integrity: sha512-/qctBn7LF9DS3ff2YYFrYtCkLLw2fboPDJUgg3HErygGbEBvebW/eGRftZH4ykDJhlCvwTsSEKz/vff7WllyAw==}
     dev: false
 
   /astro@4.1.1(typescript@5.3.3):

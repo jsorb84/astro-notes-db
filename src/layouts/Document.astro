@@ -29,9 +29,16 @@ const postDate = doc.data.pubDate
 							}
 						</div>
 						<h1>{doc.data.title}</h1>
-						<div class="grid grid-flow-row">
+						<div class="grid grid-flow-row gap-5">
                             <sub>Written & Compiled By {doc.data.author}</sub>
-                            
+                            {doc.data.tags && <span class="justify-start text-left">Tags</span>}
+                            <div class="tag-container">
+                                {
+                                    doc.data.tags && doc.data.tags.map((tag) => (
+                                        <span class="tag">{tag}</span>
+                                    ))
+                                }
+                            </div>
                            
                         </div>
 					</div>
@@ -40,13 +47,13 @@ const postDate = doc.data.pubDate
 			</main>
 
 	
-            <style>
-                /* main {
-                    width: calc(100% - 1em);
-                    max-width: 100%;
-                    color: rgb(var(--white));
-                    margin: 0;
-                } */
+            <style lang="postcss">
+                .tag-container {
+                    @apply inline-flex gap-3 px-10;
+                }
+                .tag {
+                    @apply bg-orange-500 text-white p-1 rounded border border-black;
+                }
                 h1,
                 h2,
                 h3,

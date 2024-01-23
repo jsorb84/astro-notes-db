@@ -24,6 +24,7 @@ const page: PageSEO = {
     keywords: doc.data.keywords ?? '',
     image: doc.data.coverImage ?? 'https://www.digitalocean.com/_next/static/media/intro-to-cloud.d49bc5f7.jpeg',
     url: Astro.url.href,
+    tags: doc.data.tags ?? [],
     pubDate: doc.data.pubDate ?? new Date()
 }
 ---

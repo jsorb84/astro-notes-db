@@ -10,6 +10,7 @@ const docs = defineCollection({
 		pubDate: z.date().optional(),
 		keywords: z.string().optional(),
 		author: z.string().optional(),
+		tags: z.array(z.string()).optional(),
 		category: reference("category").optional(),
 	}),
 });
@@ -29,6 +30,7 @@ const notes = defineCollection({
 		pubDate: z.date().optional(),
 		keywords: z.string().optional(),
 		author: z.string().optional(),
+		tags: z.array(z.string()).optional(),
 		category: reference("category").optional(),
 	}),
 });

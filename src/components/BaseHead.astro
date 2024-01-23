@@ -3,6 +3,8 @@
 // all pages through the use of the <BaseHead /> component.
 
 import type { PageSEO } from '../consts';
+import {GoogleAnalytics} from 'astro-analytics';
+import {GOOGLE_ANALYTICS_ID} from '../consts'
 interface Props {
 	
 	page?: PageSEO
@@ -12,9 +14,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { page } = Astro.props;
 const title = `${page?.title ? `${page.title} |` : ''} Urban Records`
+const tags = page?.tags ?? []
+const keywords = page?.keywords.split(', ') ?? []
+const tagsString = tags.join(', ')
+const keywordsAndTags = [...tags, ...keywords]
 const description = `
 	${page?.description ?? 'No Description'}
 	${page?.keywords ? ` - Keywords: ${page.keywords}` : ''}
+	${tags.length > 0 ? ` - Tags: ${tagsString}` : ''}
 	${page?.author ? ` - Written & Compiled By: ${page.author}` : ''}
 	${page?.pubDate ? ` - Published: ${page.pubDate.toDateString()}` : ''}
 `.trim()
@@ -24,6 +31,9 @@ const description = `
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <meta name="generator" content={Astro.generator} />
+
+<!-- Google Analytics -->
+<GoogleAnalytics id={GOOGLE_ANALYTICS_ID} />
 
 <!-- Font preloads -->
 <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin />
@@ -36,7 +46,7 @@ const description = `
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
-<meta name="keywords" content={page?.keywords ?? "No Keywords"} />
+<meta name="keywords" content={keywordsAndTags.join(", ") ?? "No Keywords"} />
 <meta name="author" content={page?.author ?? "No Author"} />
 
 <!-- Open Graph / Facebook -->

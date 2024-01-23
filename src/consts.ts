@@ -10,6 +10,7 @@ export interface PageSEO {
 	url: string;
 	keywords: string;
 	image: string;
+	tags?: string[];
 	description: string;
 	author: string;
 	pubDate?: Date;
@@ -31,6 +32,7 @@ export interface LinkBlock {
 	description?: string;
 	items: LinkItem[];
 }
+export const GOOGLE_ANALYTICS_ID = "G-5253DZFQN6";
 export const LinkBlocks: LinkBlock[] = [
 	{
 		title: "⏯️ Must See Videos",
