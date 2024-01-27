@@ -23,7 +23,7 @@ let {post} = Astro.props
 <style lang="postcss">
     article {
         @apply text-black border rounded-xl p-4 border-black relative;
-        @apply max-w-[350px] max-h-[250px] min-w-full min-h-full bg-discord-800;
+        @apply lg:max-w-[350px] max-h-[250px] min-w-full min-h-full bg-discord-800 overflow-hidden;
         mix-blend-mode: difference;
     }
     article h3, p {
