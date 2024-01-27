@@ -1,6 +1,10 @@
 ---
 title: Python Date Types - Part I
 author: Urban
+tags: ["Python", "Notes"]
+coverImage: https://i.ytimg.com/vi/YfO28Ihehbk/maxresdefault.jpg
+keywords: python, notes, guides
+description: Python Data Types Guide
 ---
 
 This is the first entry of notes in the Advanced Python series. This section will focus on extended Python container types. We will be talking about `lists` `tuples` and `dictionaries` along with `sets` and `collections` and much more. The goal here is to give a simple, bite sized definition and example for each as to function as a quick reference guide.

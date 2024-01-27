@@ -3,6 +3,8 @@ title: Python Matplotlib
 description: Notes on Matplotlib usage
 author: Urban
 keywords: python, matplotlib, notes
+tags: ["Python", "Notes"]
+coverImage: https://i.ytimg.com/vi/YfO28Ihehbk/maxresdefault.jpg
 ---
 
 # References

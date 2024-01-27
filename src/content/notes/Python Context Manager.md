@@ -3,6 +3,8 @@ title: Python Context Managers
 description: Context Managers
 keywords: python, notes, context
 author: Urban
+tags: ["Python", "Notes"]
+coverImage: https://i.ytimg.com/vi/YfO28Ihehbk/maxresdefault.jpg
 ---
 
 # Context Manager Creation

@@ -1,6 +1,10 @@
 ---
 title: Intro to Django
 author: Urban
+coverImage: https://static.djangoproject.com/img/logos/django-logo-negative.1d528e2cb5fb.png
+description: Introduction to Django
+keywords: django, python
+tags: ["Python", "Django"]
 ---
 
 ## [Django Documentation](https://docs.djangoproject.com/en/5.0/)

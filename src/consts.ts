@@ -50,6 +50,12 @@ export const LinkBlocks: LinkBlock[] = [
 				description:
 					"A video about the future of AI and how it is controlling the world via DARPA Bots",
 			},
+			{
+				title: "🤖 Bard Chat Research",
+				url: "https://bard.google.com/share/3bde2c18a224",
+				description:
+					"A sharable link to access an interesting conversation with Google Bard",
+			},
 		],
 	},
 
@@ -89,6 +95,21 @@ export const LinkBlocks: LinkBlock[] = [
 				url: "https://docs.python.org/3/py-modindex.html",
 				description:
 					"Python Module Index - A list of all Standard Python Modules",
+			},
+			{
+				title: "📈 Pandas Cheat Sheet",
+				url: "https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf",
+				description: "Pandas Cheat Sheet",
+			},
+			{
+				title: "⚙️ Pydantic Documentation",
+				url: "https://docs.pydantic.dev/latest/",
+				description: "Pydantic Documentation",
+			},
+			{
+				title: "💻 TkInter / Tcl Documentation",
+				url: "https://tcl.tk/man/tcl8.6/contents.htm",
+				description: "TkInter / Tcl Documentation",
 			},
 		],
 	},

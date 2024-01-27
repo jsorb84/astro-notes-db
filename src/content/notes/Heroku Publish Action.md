@@ -3,7 +3,8 @@ title: Publish to Heroku Action
 description: A Github action allowing you to automatically publish your site to Heroku. Used here on this site.
 keywords: github, actions, heroku, automation, git, notes, personal notes
 author: theofficialurban (Josh)
-category: docs
+coverImage: https://www.lavalamp.biz/wp-content/uploads/heroku.jpg
+tags: ["Heroku", "GitHub Actions"]
 ---
 
 ## Heroku Publish Action

@@ -3,6 +3,8 @@ title: Python Typing
 description: Typing overview for python's typing module
 author: Urban
 keywords: python, typing, programming, notes
+tags: ["Python", "Notes"]
+coverImage: https://i.ytimg.com/vi/YfO28Ihehbk/maxresdefault.jpg
 ---
 
 # `typing` Module

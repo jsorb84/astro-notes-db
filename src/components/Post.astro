@@ -5,25 +5,36 @@ interface Props<T extends CollectionKey> {
     post: CollectionEntry<T>
 }
 let {post} = Astro.props
-//style={`background-image: url(${post.data.coverImage ?? 'https://www.digitalocean.com/_next/static/media/intro-to-cloud.d49bc5f7.jpeg'}); background-size: cover; background-position: center; opacity: 0.8;`}
 ---
 <a href={`/${post.collection}/${post.slug}`}>
 <article 
-
-class="max-w-[350px] max-h-[250px] min-w-full min-h-full bg-discord-800 ">
-        <h3 class=" ">{post.data.title}</h3>
+    class=""
+    
+>
+    <img src={post.data.coverImage ?? 'https://www.digitalocean.com/_next/static/media/intro-to-cloud.d49bc5f7.jpeg'} />
+    <div class="shader">
+        <h3 class="">{post.data.title}</h3>
         <p class="text-white">{post.data.description ?? 'No Post Description'}</p>
-       
-    </article>
+    </div>
+    
+</article>
 </a>
 
 <style lang="postcss">
     article {
-        @apply text-black border rounded-xl p-4 border-black;
+        @apply text-black border rounded-xl p-4 border-black relative;
+        @apply max-w-[350px] max-h-[250px] min-w-full min-h-full bg-discord-800;
+        mix-blend-mode: difference;
+    }
+    article h3, p {
+        @apply z-10 relative;
         
+    }
+    
+    article img {
+        @apply opacity-50 absolute top-0 left-0 rounded-xl min-w-full min-h-full z-0;
     }
     :root::-webkit-scrollbar {
         display: none;
     }
-    
 </style>

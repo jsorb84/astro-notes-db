@@ -3,6 +3,8 @@ title: Python Pydantic Notes
 description: Notes on the Python Pydantic Package
 keywords: python, pydantic, notes, guide, types
 author: Urban
+tags: ["Python", "Notes"]
+coverImage: https://i.ytimg.com/vi/YfO28Ihehbk/maxresdefault.jpg
 ---
 
 # Pydantic Documentation [¶](https://docs.pydantic.dev/)

@@ -3,6 +3,8 @@ title: Github Publish Action
 description: A Github Action to publish a package to both NPM and Github package registries
 keywords: github, actions, workflows, yml, svelte, javascript, npm, package
 author: theofficialurban (Josh)
+coverImage: https://github.blog/wp-content/uploads/2022/12/1200x640-1.png?fit=1200%2C640
+tags: ["GitHub Actions", "NPM Packages"]
 ---
 
 # Github Actions

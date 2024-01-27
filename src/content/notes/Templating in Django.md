@@ -2,6 +2,7 @@
 title: Templating in Django
 description: A quick overview on Django Templates
 author: Urban
+coverImage: https://static.djangoproject.com/img/logos/django-logo-negative.1d528e2cb5fb.png
 ---
 
 ## Templates [¶](https://docs.djangoproject.com/en/5.0/ref/templates/language/#templates "Permalink to this headline")

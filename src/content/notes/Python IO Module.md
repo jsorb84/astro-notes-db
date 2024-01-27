@@ -3,6 +3,8 @@ title: Python IO Module
 description: IO in Python
 author: Urban
 keywords: io, python, buffering
+tags: ["Python", "Notes"]
+coverImage: https://i.ytimg.com/vi/YfO28Ihehbk/maxresdefault.jpg
 ---
 
 # Text I/O
