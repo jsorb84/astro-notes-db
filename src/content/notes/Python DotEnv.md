@@ -5,6 +5,7 @@ tags: ["Python", "Notes"]
 coverImage: https://i.ytimg.com/vi/YfO28Ihehbk/maxresdefault.jpg
 author: Urban
 description: A bite sized guide for how to use DotEnv
+pubDate: 2024-01-12
 ---
 
 Instructions for using `dotenv` in Python

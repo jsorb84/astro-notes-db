@@ -1,6 +1,10 @@
 ---
 title: Intro to GoLang
 author: Urban
+description: Basic Intro to Go Language
+keywords: go, programming, notes
+tags: ["Go", "Notes"]
+coverImage: https://cdn.thenewstack.io/media/2022/05/57bb2a1f-golang.png
 ---
 
 ## Primary Resource

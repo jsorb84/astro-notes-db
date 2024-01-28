@@ -3,6 +3,7 @@ title: theofficialurban/svelte-gradience
 description: A gradient over time wrapper with d3-interpolate
 author: theofficialurban (Josh)
 keywords: d3-interpolate, lodash, gradients, colors, npm, package, svelte, javascript
+coverImage: https://miro.medium.com/v2/resize:fit:800/1*694arrMBzrG9pRcLHxC0WA.png
 ---
 
 A very thin wrapper for beautiful gradient coloring made using `d3-interpolate`
@@ -82,10 +83,10 @@ colorOne,
 
 ```html
 <script lang="ts">
-	import Gradience from '@theofficialurban/svelte-gradience';
+	import Gradience from "@theofficialurban/svelte-gradience";
 	const myColors = [
 		// Pair #1, will interpolate between red and blue
-		['red', 'blue']
+		["red", "blue"],
 	];
 	// Second Argument is Svelte Tweened Options /w Interpolater, leave blank for default
 	const gradience = new Gradience(myColors, { duration: 1000 });

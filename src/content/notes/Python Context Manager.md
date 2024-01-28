@@ -5,6 +5,7 @@ keywords: python, notes, context
 author: Urban
 tags: ["Python", "Notes"]
 coverImage: https://i.ytimg.com/vi/YfO28Ihehbk/maxresdefault.jpg
+pubDate: 2024-01-09
 ---
 
 # Context Manager Creation

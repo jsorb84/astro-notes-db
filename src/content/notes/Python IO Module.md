@@ -5,6 +5,7 @@ author: Urban
 keywords: io, python, buffering
 tags: ["Python", "Notes"]
 coverImage: https://i.ytimg.com/vi/YfO28Ihehbk/maxresdefault.jpg
+pubDate: 2024-01-18
 ---
 
 # Text I/O

@@ -111,6 +111,11 @@ export const LinkBlocks: LinkBlock[] = [
 				url: "https://tcl.tk/man/tcl8.6/contents.htm",
 				description: "TkInter / Tcl Documentation",
 			},
+			{
+				title: "🏁 FastAPI Documentation",
+				url: "https://fastapi.tiangolo.com/",
+				description: "FastAPI Documentation",
+			},
 		],
 	},
 ];

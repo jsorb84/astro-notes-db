@@ -4,6 +4,8 @@ description: Notes on the FastAPI Library
 author: Urban
 keywords: python, fastapi, api, library
 tags: ["Python", "Notes", "Web"]
+coverImage: https://i.imgur.com/394f5vH.jpeg
+pubDate: 2024-28-01
 ---
 
 # Hello World Example
@@ -306,6 +308,75 @@ async def read_items(commons: Annotated[dict, Depends(my_dependency)]):
 
 ```
 
+## Callable Dependencies
+
+### Old Way (Non-Parameterized Class)
+
+```python
+from typing import Annotated
+from fastapi import Depends
+class MyClass:
+	def __init__(self, q: str = ""):
+		self.q = q
+
+# We cannot instantiate the class ourselves, Depends() does this for us
+
+@app.get("/")
+async def main(
+	# Traditional, passing class as a dep.
+	# The class will automatically instantiate an instance
+	# However you cannot pass in the `q` parameter
+	myCallableDep: Annotated[MyClass, Depends(MyClass)]
+
+	# SHORTCUT ----- Depends()
+	# myCallableDep: Annotated[MyClass, Depends()]
+):
+	return myCallableDep.q # Undefined
+```
+
+### Parameterized `__call__()`
+
+A class may be made callable (class instance) by defining a `__call__` method
+
+> The purpose of the `__call__` method is that using `Depends(...)` actually CALLS the dependency. By doing this, we can create an instance, and use the instance as a parameter.
+
+```python
+from typing import Annotated
+from fastapi import Depends
+class MyClass:
+	def __init__(self, q: str = ""):
+		self.q = q
+	def __call__(self, q: str = ""):
+		return self.q
+
+parameterizedInstance = MyClass(q="Hello World")
+
+@app.get("/")
+async def main(
+	# Instead of Depends(MyClass) we can use Depends(parameterizedInstance)
+	myCallableDep: Annotated[MyClass, Depends(parameterizedInstance)]
+):
+	# We now have access to our self-defined param `q`
+	return myCallableDep.q # Defined
+```
+
+> In this case, this `__call__` is what **FastAPI** will use to check for additional parameters and sub-dependencies, and this is what will be called to pass a value to the parameter in your *path operation function* later.
+
+## Dependencies in Path Operation Definition
+
+> The *path operation decorator* receives an optional argument `dependencies`.
+> It should be a `list` of `Depends()`:
+
+```python
+dependencies: list[Depends] = [
+	Depends(...),
+	...
+]
+@app.get("/", dependencies=dependencies)
+```
+
+> These dependencies will be executed/solved the same way as normal dependencies. ==But their value (if they return any) won't be passed to your *path operation function*.==
+
 # File Structure / Multiple Files [¶](https://fastapi.tiangolo.com/tutorial/bigger-applications/)
 
 ![structure](https://fastapi.tiangolo.com/img/tutorial/bigger-applications/package.svg)
@@ -413,6 +484,274 @@ async def update_item(item_id: str):
     return {"item_id": item_id, "name": "The great Plumbus"}
 ```
 
+### Including the `APIRouter`
+
+```python
+from fastapi import APIRouter, FastAPI
+
+app = FastAPI()
+
+# Regular Routes Etc.
+...
+
+# You can declare the `prefix` here or in the include
+admin_router = APIRouter(prefix="/admin")
+
+# `/admin/dashboard`
+@admin_router.get("/dashboard")
+async def admin_dash(...):
+	...
+
+# Include the Admin Router
+# Optionally define `prefix` here or above
+app.include_router(admin_router)
+```
+
+# Templating
+
+## `Jinja2Templates`
+
+```python
+from fastapi import Request, FastAPI
+from fastapi.templating import Jinja2Templates
+
+app = FastAPI()
+
+templates = Jinja2Templates(directory="./templates")
+
+@app.get("/")
+async def main(req: Request): # Grab the Request
+	return templates.TemplateResponse(request=req, name="index.html",
+		context={"name": "Josh"})
+```
+
+### `url_for`
+
+> You can also use `url_for()` inside of the template, it takes as arguments the same arguments that would be used by your *path operation function*.
+>
+> So, the section with:
+>
+> `<a href="{{ url_for('read_item', id=id) }}">`
+>
+> ...will generate a link to the same URL that would be handled by the *path operation function* `read_item(id=id)`.
+>
+> For example, with an ID of `42`, this would render:
+>
+> Copy to clipboard
+>
+> `<a href="/items/42">`
+
+By using `url_for()` you can access static files:
+
+Static files are found in the `static` folder
+
+```html
+<head>
+	<link href={{ url_for("static", path="/styles.css") }} />
+</head>
+```
+
+# Static Files
+
+## Use `StaticFiles`
+
+```python
+from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
+
+app = FastAPI()
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
+```
+
+> The first `"/static"` refers to the sub-path this "sub-application" will be "mounted" on. So, any path that starts with `"/static"` will be handled by it.
+>
+> The `directory="static"` refers to the name of the directory that contains your static files.
+>
+> The `name="static"` gives it a name that can be used internally by **FastAPI**.
+>
+> All these parameters can be different than "`static`", adjust them with the needs and specific details of your own application.
+
+## Mounting
+
+> "Mounting" means adding a complete "independent" application in a specific path, that then takes care of handling all the sub-paths.
+>
+> This is different from using an `APIRouter` as a mounted application is completely independent. The OpenAPI and docs from your main application won't include anything from the mounted application, etc.
+>
+> You can read more about this in the [Advanced User Guide](https://fastapi.tiangolo.com/advanced/).
+
+# Background Tasks
+
+> You can define background tasks to be run *after* returning a response.
+>
+> This is useful for operations that need to happen after a request, but that the client doesn't really have to be waiting for the operation to complete before receiving the response.
+>
+> This includes, for example:
+>
+> - Email notifications sent after performing an action:
+>   - As connecting to an email server and sending an email tends to be "slow" (several seconds), you can return the response right away and send the email notification in the background.
+> - Processing data:
+>   - For example, let's say you receive a file that must go through a slow process, you can return a response of "Accepted" (HTTP 202) and process it in the background.
+
+## Using `BackgroundTasks`
+
+### Task Functions
+
+> Create a function to be run as the background task.
+>
+> It is just a standard function that can receive parameters.
+>
+> It can be an `async def` or normal `def` function, **FastAPI** will know how to handle it correctly.
+
+```python
+from fastapi import BackgroundTasks, FastAPI
+
+app = FastAPI()
+
+def some_task(email: str, message: str = ""):
+	# Do something here
+	...
+
+@app.post("/send-notif/{email}")
+async def send_notif(email: str, tasks: BackgroundTasks):
+	tasks.add_task(some_task, email, message="My Message")
+	return ...
+
+```
+
+### `.add_task()`
+
+> `.add_task()` receives as arguments:
+>
+> - A task function to be run in the background (`write_notification`).
+> - Any sequence of arguments that should be passed to the task function in order (`email`).
+> - Any keyword arguments that should be passed to the task function (`message="some notification"`).
+
+#### `BackgroundTasks` Technical Details [¶](https://fastapi.tiangolo.com/tutorial/background-tasks/#technical-details)
+
+# Testing
+
+## Using `TestClient`
+
+> Requires installation of `httpx` > `pip install httpx`
+
+1. Import `TestClient`
+2. Create `TestClient` instance by passing the `FastAPI` app in
+3. Create functions that start with `test_`
+4. Use `TestClient` object same as `httpx`
+5. Use `pytest` conventions
+
+```python
+from fastapi import FastAPI
+from fastapi.testclient import TestClient
+
+app = FastAPI()
+
+@app.get("/")
+async def read_main():
+    return {"msg": "Hello World"}
+
+client = TestClient(app)
+
+def test_read_main():
+    response = client.get("/")
+    assert response.status_code == 200
+    assert response.json() == {"msg": "Hello World"}
+```
+
+> Notice that the testing functions are normal `def`, not `async def`.
+>
+> And the calls to the client are also normal calls, not using `await`.
+>
+> This allows you to use `pytest` directly without complications.
+
+## Async Tests [¶](https://fastapi.tiangolo.com/advanced/async-tests/#async-tests)
+
+### Using `HTTPX`
+
+> Even if your **FastAPI** application uses normal `def` functions instead of `async def`, it is still an `async` application underneath.
+>
+> The `TestClient` does some magic inside to call the asynchronous FastAPI application in your normal `def` test functions, using standard pytest. But that magic doesn't work anymore when we're using it inside asynchronous functions. By running our tests asynchronously, we can no longer use the `TestClient` inside our test functions.
+>
+> The `TestClient` is based on [HTTPX](https://www.python-httpx.org/), and luckily, we can use it directly to test the API.
+
+```python
+import pytest
+from httpx import AsyncClient
+
+from .main import app
+
+
+@pytest.mark.anyio
+async def test_root():
+    async with AsyncClient(app=app, base_url="http://test") as ac:
+        response = await ac.get("/")
+    assert response.status_code == 200
+    assert response.json() == {"message": "Tomato"}
+```
+
+> The marker `@pytest.mark.anyio` tells pytest that this test function should be called asynchronously:
+> Then we can create an `AsyncClient` with the app, and send async requests to it, using `await`.
+
+# Callbacks
+
+> The process that happens when your API app calls the *external API* is named a "callback". Because the software that the external developer wrote sends a request to your API and then your API *calls back*, sending a request to an *external API* (that was probably created by the same developer).
+>
+> In this case, you could want to document how that external API *should* look like. What *path operation* it should have, what body it should expect, what response it should return, etc.
+
+There are 2 main differences from a normal *path operation*:
+
+- It doesn't need to have any actual code, because your app will never call this code. It's only used to document the *external API*. So, the function could just have `pass`.
+- The *path* can contain an [OpenAPI 3 expression](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.1.0.md#key-expression) (see more below) where it can use variables with parameters and parts of the original request sent to *your API*.
+
+## Callback Path Expression
+
+> The callback *path* can have an [OpenAPI 3 expression](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.1.0.md#key-expression) that can contain parts of the original request sent to *your API*.
+
+```python
+"{$callback_url}/invoices/{$request.body.id}"
+```
+
+## Creation of a Callback
+
+```python
+from typing import Union
+
+from fastapi import APIRouter, FastAPI
+from pydantic import BaseModel, HttpUrl
+
+app = FastAPI()
+
+class Invoice(BaseModel):
+    id: str
+    title: Union[str, None] = None
+    customer: str
+    total: float
+
+class InvoiceEvent(BaseModel):
+    description: str
+    paid: bool
+
+class InvoiceEventReceived(BaseModel):
+    ok: bool
+
+# Create an APIRouter()
+invoices_callback_router = APIRouter()
+
+@invoices_callback_router.post(
+    "{$callback_url}/invoices/{$request.body.id}", response_model=InvoiceEventReceived
+)
+def invoice_notification(body: InvoiceEvent):
+    pass
+
+@app.post("/invoices/", callbacks=invoices_callback_router.routes)
+def create_invoice(invoice: Invoice, callback_url: Union[HttpUrl, None] = None):
+
+    # Send the invoice, collect the money, send the notification (the callback)
+    return {"msg": "Invoice received"}
+
+```
+
 # Middleware
 
 > Work in Progress
@@ -424,3 +763,47 @@ async def update_item(item_id: str):
 # SQL / Databases
 
 > Work in Progress
+
+# WebSockets
+
+> Work in Progress
+
+# Available Response Types [¶](https://fastapi.tiangolo.com/advanced/custom-response/)
+
+##### `Response`
+
+##### `HTMLResponse`
+
+##### `PlainTextResponse`
+
+##### `JSONResponse`
+
+##### `ORJSONResponse`
+
+##### `UJSONResponse`
+
+##### `RedirectResponse`
+
+##### `StreamingResponse`
+
+##### `FileResponse`
+
+# Available Middleware [¶](https://fastapi.tiangolo.com/advanced/middleware/#advanced-middleware)
+
+##### `HTTPSRedirectMiddleware`
+
+##### `TrustedHostMiddleware`
+
+##### `GZipMiddleware`
+
+# Metadata and Docs URLs
+
+|     Parameter      |  Type  |                                         Description                                         |
+| :----------------: | :----: | :-----------------------------------------------------------------------------------------: |
+|      `title`       | `str`  |                                    The title of the API                                     |
+|     `summary`      | `str`  |                                       A short summary                                       |
+|   `description`    | `str`  |                                     A short description                                     |
+|     `version`      | `str`  |                                           Version                                           |
+| `terms_of_service` | `str`  |                                    Terms of service URL                                     |
+|     `contact`      | `dict` | The contact information for the exposed API<br>(`name`, `url`, and `email` for one contact) |
+|   `license_info`   | `dict` |                              (`name`, `identifier`, and `url`)                              |

@@ -3,6 +3,7 @@ title: theofficialurban/svelte-utils
 keywords: svelte, utilities, packages, npm, pnpm, free, apache
 author: theofficialurban (Josh)
 description: My collection of Svelte Utilities docs.
+coverImage: https://miro.medium.com/v2/resize:fit:800/1*694arrMBzrG9pRcLHxC0WA.png
 ---
 
 ## Documentation
@@ -27,11 +28,14 @@ The body of the form, the same as `<form>`
 
 ```html
 <script lang="ts">
-	import Form from '@theofficialurban/svelte-utils';
+	import Form from "@theofficialurban/svelte-utils";
 </script>
 <Form.Body method="POST">
 	<Form.Control>
-		<Form.Input name="input" type="text" />
+		<Form.Input
+			name="input"
+			type="text"
+		/>
 	</Form.Control>
 </Form.Body>
 ```
@@ -48,9 +52,14 @@ The body of the form, the same as `<form>`
 
 ```html
 <script lang="ts">
-	import { GradientText } from '@theofficialurban/svelte-utils';
+	import { GradientText } from "@theofficialurban/svelte-utils";
 </script>
-<GradientText element="span" --from="" --to="">Text</GradientText>
+<GradientText
+	element="span"
+	--from=""
+	--to=""
+	>Text</GradientText
+>
 ```
 
 ## `Table`
@@ -65,11 +74,14 @@ The body of the form, the same as `<form>`
 
 ```html
 <script lang="ts">
-	import { Table } from '@theofficialurban/svelte-utils';
+	import { Table } from "@theofficialurban/svelte-utils";
 </script>
-<table rows="{}" columns="{}">
-	{#snippet cell({row, column})} .... {/snippet} {#snippet column(col)} .... {/snippet} {#snippet
-	title()} .... {/snippet}
+<table
+	rows="{}"
+	columns="{}"
+>
+	{#snippet cell({row, column})} .... {/snippet} {#snippet column(col)} ....
+	{/snippet} {#snippet title()} .... {/snippet}
 </table>
 ```
 
@@ -85,10 +97,14 @@ The body of the form, the same as `<form>`
 
 ```html
 <script lang="ts">
-	import { ConfirmationButton } from '@theofficialurban/svelte-utils';
+	import { ConfirmationButton } from "@theofficialurban/svelte-utils";
 </script>
 
-<ConfirmationButton text="Please Confirm Your Choice" onconfirm="{..}" ondecline="{..}">
+<ConfirmationButton
+	text="Please Confirm Your Choice"
+	onconfirm="{..}"
+	ondecline="{..}"
+>
 	Delete
 </ConfirmationButton>
 ```
@@ -105,7 +121,7 @@ The body of the form, the same as `<form>`
 
 ```html
 <script lang="ts">
-	import { SVGBounce } from '@theofficialurban/svelte-utils';
+	import { SVGBounce } from "@theofficialurban/svelte-utils";
 	const cssFn = (n, s, v) => {
 		return `translate: translateY(${v}px);`;
 	};
@@ -128,7 +144,7 @@ The body of the form, the same as `<form>`
 
 ```html
 <script lang="ts">
-	import { useFloatingEffect } from '@theofficialurban/svelte-utils';
+	import { useFloatingEffect } from "@theofficialurban/svelte-utils";
 	const { effect, store } = useFloatingEffect();
 </script>
 
@@ -156,13 +172,21 @@ Provides loading for a promise
 
 ```html
 <script lang="ts">
-	import { Modal } from '@theofficialurban/svelte-utils';
+	import { Modal } from "@theofficialurban/svelte-utils";
 </script>
 
 // Slot: loading // Value = Promise Awaited Return
-<Modal.Wrapper {promise} let:value>
+<Modal.Wrapper
+	{promise}
+	let:value
+>
 	<span slot="loading">Loading....</span>
-	<Modal.List modal="{value" as ({name: string}[])}>
+	<Modal.List
+		modal="{value"
+		as
+		({name:
+		string}[])}
+	>
 		{#snippet children(item: {name: string})}
 		<li>{item.name}</li>
 		{/snippet}

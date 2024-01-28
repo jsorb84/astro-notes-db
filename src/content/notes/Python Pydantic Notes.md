@@ -5,6 +5,7 @@ keywords: python, pydantic, notes, guide, types
 author: Urban
 tags: ["Python", "Notes"]
 coverImage: https://i.ytimg.com/vi/YfO28Ihehbk/maxresdefault.jpg
+pubDate: 2024-01-20
 ---
 
 # Pydantic Documentation [¶](https://docs.pydantic.dev/)
