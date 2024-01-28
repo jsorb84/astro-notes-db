@@ -206,6 +206,58 @@ async def read_items(ads_id: Annotated[str | None, Cookie()] = None):
 
 > To declare cookies, you need to use `Cookie`, because otherwise the parameters would be interpreted as query parameters.
 
+### Settings Cookies
+
+To set cookies, you need to access the `Response` object,
+
+```python
+from fastapi import FastAPI, Response
+from fastapi.responses import JSONResponse
+
+app = FastAPI()
+
+@app.post("/post")
+def create_cookie(response: Response):
+	response.set_cookie(key="session", value="value")
+	return {...}
+
+# OR - Return a `Response` object directly
+
+@app.post("/cookie/")
+def create_cookie():
+	content = {"hello": "world"}
+	response = JSONResponse(content=content)
+	response.set_cookie(key="fakesession", value="fake-cookie-session-value")
+	return response
+```
+
+> Keep in mind that if you return a response directly instead of using the `Response` parameter, FastAPI will return it directly.
+>
+> So, you will have to make sure your data is of the correct type. E.g. it is compatible with JSON, if you are returning a `JSONResponse`.
+>
+> And also that you are not sending any data that should have been filtered by a `response_model`.
+
+### Setting Headers
+
+```python
+from fastapi import FastAPI, Response
+from fastapi.responses import JSONResponse
+app = FastAPI()
+
+@app.get("/headers-and-object/")
+def get_headers(response: Response):
+    response.headers["X-Cat-Dog"] = "alone in the world"
+    return {"message": "Hello World"}
+
+# OR - Return the response directly
+
+@app.get(...)
+def get_headers():
+	content = {"message": "Hello World"}
+	headers = {"Something": "Etc"}
+	return JSONResponse(content=content, headers=headers)
+```
+
 ## Response Model - Return Type
 
 > You can declare the type used for the response by annotating the *path operation function* **return type**.
@@ -764,7 +816,7 @@ def create_invoice(invoice: Invoice, callback_url: Union[HttpUrl, None] = None):
 
 > Work in Progress
 
-# WebSockets
+# WebSockets [¶](https://fastapi.tiangolo.com/advanced/websockets/)
 
 > Work in Progress
 
